@@ -1,0 +1,48 @@
+ALWAYS YOURS · CURRENT FULL PACKAGE
+
+Frontend: GitHub Pages
+Worker API: Cloudflare Workers
+Database: Cloudflare D1 (always-yours-chat)
+Photo storage: Cloudflare Workers KV (always-yours-chat-photos)
+
+FILES
+- index.html / styles.css / app.js: GitHub Pages frontend
+- sw.js: PWA/service worker
+- manifest.webmanifest + icons/: install/home-screen assets
+- worker.js: Cloudflare Worker API
+- wrangler.jsonc: Worker deployment configuration
+- MIGRATE-READ-EDIT-PRESENCE.sql: one-time D1 migration for edit/read/presence
+- MIGRATE-PHOTO-KV.sql: one-time D1 migration for photo metadata
+- SETUP-PHOTO-KV.txt: KV photo setup notes
+
+CLOUDFLARE BINDINGS
+- D1 binding name: DB
+- D1 database: always-yours-chat
+- KV binding name: PHOTOS
+- KV namespace: always-yours-chat-photos
+- Worker cron: 0 * * * *
+
+IMPORTANT
+The migration SQL files are one-time migrations. If you already ran them successfully, do not run them again.
+
+CURRENT FEATURES
+- Shared secret room
+- Browser-side AES-GCM encryption
+- Text messages with 48-hour lifetime
+- Encrypted photo upload with 48-hour KV expiration
+- Photo viewer, zoom and Save to Photos / Gallery
+- Message editing
+- Read receipts / Seen
+- Online / last-seen presence
+- Romantic emoji/sticker picker
+- PWA Add to Home support
+- Responsive phone / tablet / desktop layout
+
+GITHUB PAGES
+Upload the frontend files and folders from this package to the repository root. The Worker files may remain in the repository, but only Cloudflare should deploy worker.js as the API.
+
+CLOUDFLARE WORKER
+The current worker configuration is in wrangler.jsonc. The Worker must have DB and PHOTOS bindings with the names above.
+
+SECURITY NOTE
+The shared secret is used to derive the room key and browser encryption key. GitHub Pages frontend code is public. Use a long unique secret and do not reuse it elsewhere.

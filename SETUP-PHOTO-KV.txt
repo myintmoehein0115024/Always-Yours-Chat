@@ -1,0 +1,19 @@
+Always Yours · Photo Sharing (no R2 required)
+
+This version stores encrypted photos in Cloudflare Workers KV so it can stay on the Workers Free plan.
+
+1. Create one KV namespace: always-yours-chat-photos
+2. Bind it to Worker always-yours-chat-api as variable name: PHOTOS
+3. Run MIGRATE-PHOTO-KV.sql ONCE in the D1 Console for always-yours-chat.
+4. Deploy the Worker again.
+
+Photo behavior
+- Browser compresses the selected image before upload.
+- Image bytes are AES-GCM encrypted in the browser before KV storage.
+- KV entry expires automatically after 48 hours.
+- D1 message metadata is cleaned by the hourly Worker Cron and also opportunistically on normal requests.
+- The receiver gets a Save to Photos / Gallery button. On supported phones, it uses the share sheet; otherwise it downloads the image.
+
+Important
+- Keep the KV namespace private; do not enable public access.
+- This project intentionally does not use R2 because R2 currently requires an R2 subscription/checkout flow, while Workers KV is included on Workers Free.

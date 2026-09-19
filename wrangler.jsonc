@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "always-yours-chat-api",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-19",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "always-yours-chat",
+      "database_id": "0cb1160d-7e2e-45f4-a9c0-c9a0cf0014cb"
+    }
+  ],
+  "triggers": {
+    "crons": [
+      "0 * * * *"
+    ]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "PHOTOS",
+      "id": "dd7113323c5c409194f746b54a9ca280"
+    }
+  ]
+}

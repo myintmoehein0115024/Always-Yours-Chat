@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#efe8ff">
+  <meta name="description" content="A tiny private space for two hearts.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Always Yours">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Always Yours ♡</title>
+</head>
+<body>
+  <main class="shell">
+    <section id="gate" class="card gate-card">
+      <div class="brand-stack" aria-label="Always Yours">
+        <div class="brand-mark" aria-hidden="true">M <span>💞</span> T</div>
+        <div class="brand-script">Always yours ♡</div>
+      </div>
+      <div class="eyebrow">A PRIVATE LITTLE PLACE</div>
+      <h1>Always yours.</h1>
+      <p class="intro">A quiet room for two. Only someone with your shared secret can reach the same conversation.</p>
+
+      <div class="field-group">
+        <label for="displayName">Your name</label>
+        <div class="name-switch" role="group" aria-label="Choose your name">
+          <button type="button" class="name-option active" data-name="Ko Ko" aria-pressed="true">Ko Ko</button>
+          <button type="button" class="name-option" data-name="Chit Chit" aria-pressed="false">Chit Chit</button>
+        </div>
+        <div id="selectedPerson" class="selected-person" aria-live="polite">Selected: Ko Ko ♡</div>
+      </div>
+
+      <div class="field-group">
+        <label for="secret">Your stable secret <span class="label-soft">· shared only by us</span></label>
+        <div class="secret-wrap">
+          <input id="secret" type="text" autocomplete="off" spellcheck="false" placeholder="Type your secret exactly as you saved it" minlength="10" inputmode="text" aria-describedby="secretHint">
+          <button id="toggleSecret" class="icon-button secret-toggle" type="button" aria-label="Hide secret" aria-pressed="true">Hide</button>
+        </div>
+        <div id="secretHint" class="hint">Your secret is visible while you type, so you can check every character. Use the same strong secret on both devices.</div>
+      </div>
+
+      <button id="enterBtn" class="primary-button" type="button">Enter our chat ♡</button>
+      <div id="status" class="status" aria-live="polite"></div>
+
+      <div class="gate-actions">
+        <button id="gateInstallBtn" class="install-pill" type="button">
+          <span class="install-pill-icon">♡</span>
+          <span>
+            <strong>Add to Home</strong>
+            <small>Keep our little room on your device</small>
+          </span>
+        </button>
+      </div>
+
+      <div class="tiny-note">Messages are encrypted in the browser before they are stored.</div>
+    </section>
+
+    <section id="chat" class="card chat-card hidden" aria-label="Private chat">
+      <header class="chat-header">
+        <div>
+          <div class="eyebrow">OUR LITTLE ROOM</div>
+          <h2>Always Yours <span>♡</span></h2>
+          <p id="roomLabel" class="room-label">Private room</p>
+          <div class="chat-subline">two hearts · one quiet place · always yours ♡</div>
+        </div>
+        <div class="header-actions">
+          <button id="changeSecretBtn" class="ghost-button" type="button">Change secret</button>
+          <button id="installBtn" class="ghost-button install-ghost" type="button">Add to Home</button>
+        </div>
+      </header>
+
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <div id="emptyState" class="empty-state">
+        <div class="empty-heart">♡</div>
+        <strong>Your little room is quiet.</strong>
+        <span>Leave the first message. It will stay here for two days.</span>
+      </div>
+
+      <div class="composer-wrap">
+        <div id="newMessageHint" class="new-message-hint hidden" aria-live="polite">New memory ♡</div>
+        <div id="emojiPanel" class="emoji-panel hidden" aria-label="Emoji picker"></div>
+        <div id="stickerPanel" class="sticker-panel hidden" aria-label="Stickers"></div>
+        <div class="composer-tools">
+          <button id="emojiBtn" class="tool-button" type="button" aria-label="Open emoji picker" aria-expanded="false">😊</button>
+          <button id="stickerBtn" class="tool-button" type="button" aria-label="Open sticker picker" aria-expanded="false">💞</button>
+          <button id="photoBtn" class="tool-button photo-tool-button" type="button" aria-label="Send a photo">📷</button>
+          <input id="photoInput" class="photo-input" type="file" accept="image/*" capture="environment">
+          <div class="tool-spacer"></div>
+          <span id="connectionState" class="connection-state">Connecting…</span>
+        </div>
+        <div id="photoPreview" class="photo-preview hidden" aria-live="polite">
+          <div class="photo-preview-thumb-wrap">
+            <img id="photoPreviewImg" class="photo-preview-img" alt="Selected photo preview">
+          </div>
+          <div class="photo-preview-info">
+            <strong id="photoPreviewName">Photo selected</strong>
+            <span id="photoPreviewMeta">Compressed securely before sending.</span>
+          </div>
+          <button id="removePhotoBtn" class="photo-remove-button" type="button" aria-label="Remove selected photo">×</button>
+        </div>
+        <div class="composer">
+          <textarea id="messageInput" rows="1" maxlength="2000" placeholder="Write something only we need to see…"></textarea>
+          <button id="sendBtn" class="send-button" type="button">Send ♡</button>
+        </div>
+        <div class="composer-foot">Private room · photos and messages disappear after 48 hours · only us ♡</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="installModal" class="install-modal hidden" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+    <div class="install-backdrop" data-close-install></div>
+    <div class="install-sheet">
+      <button id="closeInstall" class="modal-close" type="button" aria-label="Close">×</button>
+      <div class="install-icon-wrap"><img src="icons/icon-192.png" alt="Always Yours app icon"></div>
+      <div class="eyebrow">KEEP OUR LITTLE ROOM CLOSE</div>
+      <h3 id="installTitle">Add Always Yours ♡</h3>
+      <p id="installLead" class="install-lead">Put our private room on your device so it opens like an app.</p>
+      <div id="installSteps" class="install-steps"></div>
+      <button id="installAction" class="primary-button install-action" type="button">Install Always Yours ♡</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>

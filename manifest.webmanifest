@@ -1,0 +1,16 @@
+{
+  "name": "Always Yours ♡",
+  "short_name": "Always Yours",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f2ff",
+  "theme_color": "#efe8ff",
+  "description": "A tiny private room for two hearts.",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"icons/icon-512-maskable.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ]
+}
