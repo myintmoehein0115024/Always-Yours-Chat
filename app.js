@@ -765,7 +765,7 @@ function buildEmojiPanel(){
       const tab=document.createElement("button");
       tab.type="button"; tab.className="emoji-tab"; tab.textContent=name;
       tab.setAttribute("aria-selected",String(name===current));
-      tab.addEventListener("click",()=>{current=name; render();});
+      tab.addEventListener("click",(event)=>{event.preventDefault();event.stopPropagation();current=name;render();});
       tabs.appendChild(tab);
     });
     emojiPanel.appendChild(tabs);
@@ -773,7 +773,7 @@ function buildEmojiPanel(){
     groups[current].forEach(e=>{
       const b=document.createElement("button");
       b.type="button"; b.className="emoji-choice"; b.textContent=e; b.title=`Use ${e}`;
-      b.addEventListener("click",()=>{ input.value += e; input.focus(); updateSendButton(); });
+      b.addEventListener("click",(event)=>{event.preventDefault();event.stopPropagation();input.value += e;input.focus();updateSendButton();});
       grid.appendChild(b);
     });
     emojiPanel.appendChild(grid);
